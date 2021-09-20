@@ -64,12 +64,12 @@
   margin-top: 20px;
   border: solid 3px #fff;
   border-radius: 0px;
-  font-size: 18px;
+  font-size: 15px;
   font-family: "Inria Sans", sans-serif;
   font-weight: normal;
   color: #fff;
   text-align: center;
-  width: 290px;
+  max-width: 80%;
 }
 
 .buttonSubmit {
@@ -77,7 +77,7 @@
   background-color: transparent;
   border-radius: 0px;
   font-size: 20px;
-  font-family: 'Inria Sans', sans-serif;
+  font-family: "Inria Sans", sans-serif;
   font-weight: normal;
   color: #fff;
   text-align: center;
@@ -92,6 +92,20 @@
 }
 
 .buttonSubmit:hover {
+  border: solid 3px #fff;
+  border-radius: 0px;
+  font-size: 20px;
+  font-family: "Inria Sans", sans-serif;
+  font-weight: normal;
+  text-align: center;
+  line-height: 31px;
+  margin-top: 20px;
+  margin-bottom: 40px;
+  padding: 10px;
+  height: auto;
+  width: 100%;
+  max-width: 175px;
+  font-weight: bold;
   background-color: white;
   color: black;
   font-weight: bold;

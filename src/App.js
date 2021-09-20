@@ -20,24 +20,24 @@ function App() {
     },
     {
       id: 3,
-      name: 'Sami',
-      value: 'sami'
+      name: 'Sami Guesmi',
+      value: 'sami guesmi'
     },
 
     {
       id: 4,
-      name: 'DJ Panda',
-      value: 'panda'
+      name: 'Yassine Yahbi',
+      value: 'yassine yahbi'
     },
     {
       id: 5,
-      name: 'Majdi',
-      value: 'majdi'
+      name: 'Majdi Manai',
+      value: 'majdi manai'
     },
     {
       id: 6,
-      name: 'Réseaux Sociaux (Facebook, Instagram, TikTok...)',
-      value: 'social network'
+      name: 'Social Media',
+      value: 'social media'
     }
   ]
 
@@ -112,6 +112,7 @@ function App() {
                 <input
                   {...register("fullName", { required: 'Please enter your full name.' })}
                   placeholder='Full Name'
+                  type="text"
                   className="formInput"
                 />
 
@@ -128,6 +129,7 @@ function App() {
                     }
                   })}
                   placeholder='E-mail'
+                  type="email"
                   className="formInput"
                 />
 
@@ -144,6 +146,7 @@ function App() {
                     }
                   })}
                   placeholder='Phone Number'
+                  type="tel"
                   className="formInput"
                 />
 
