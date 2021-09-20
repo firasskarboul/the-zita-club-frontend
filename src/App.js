@@ -64,7 +64,6 @@ function App() {
       }
 
       let reservationCode = s + result + ms
-      setAdded(true)
 
       await api
         .post('/reservations', {
