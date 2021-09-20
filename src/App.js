@@ -20,27 +20,22 @@ function App() {
     },
     {
       id: 3,
-      name: 'Mohamed Taher Amara',
-      value: 'mohamed taher amara'
-    },
-    {
-      id: 4,
       name: 'Sami',
       value: 'sami'
     },
 
     {
-      id: 5,
+      id: 4,
       name: 'DJ Panda',
       value: 'panda'
     },
     {
-      id: 6,
+      id: 5,
       name: 'Majdi',
       value: 'majdi'
     },
     {
-      id: 7,
+      id: 6,
       name: 'Réseaux Sociaux (Facebook, Instagram, TikTok...)',
       value: 'social network'
     }
@@ -48,41 +43,47 @@ function App() {
 
   const [loading, setIsLoading] = useState(false)
   const [added, setAdded] = useState(false)
+  const [filledSelect, setFilledSelect] = useState(false)
 
-  const { register, handleSubmit, watch, formState: { errors } } = useForm();
+  const { register, handleSubmit, formState: { errors } } = useForm();
   var result = '';
   const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
   var charactersLength = characters.length;
 
   const onSubmit = async data => {
-    setIsLoading(true)
+    if (data.broughtBy === "") {
+      setFilledSelect(true)
+    } else {
+      setIsLoading(true)
 
-    var timestamp = new Date().getUTCMilliseconds();
+      var ms = new Date().getUTCMilliseconds();
+      var s = new Date().getSeconds();
 
-    for (var i = 0; i < 12; i++) {
-      result += characters.charAt(Math.floor(Math.random() * charactersLength));
+      for (var i = 0; i < 5; i++) {
+        result += characters.charAt(Math.floor(Math.random() * charactersLength));
+      }
+
+      let reservationCode = s + result + ms
+      setAdded(true)
+
+      await api
+        .post('/reservations', {
+          "fullName": data.fullName,
+          "email": data.email,
+          "phoneNumber": data.phone,
+          "broughtBy": data.broughtBy,
+          "payment": false,
+          "reservationCode": reservationCode
+        })
+        .then(res => {
+          console.log(res.data)
+          setIsLoading(false)
+          setAdded(true)
+        })
+        .catch(e => {
+          console.log(e)
+        })
     }
-
-    let reservationCode = result + timestamp
-    // console.log(orderCode)
-
-    await api
-      .post('/reservations', {
-        "fullName": data.fullName,
-        "email": data.email,
-        "phoneNumber": data.phone,
-        "broughtBy": data.broughtBy,
-        "payment": false,
-        "reservationCode": reservationCode
-      })
-      .then(res => {
-        console.log(res.data)
-        setIsLoading(false)
-        setAdded(true)
-      })
-      .catch(e => {
-        console.log(e)
-      })
   };
 
   return (
@@ -92,60 +93,77 @@ function App() {
         {
           added ?
             <div>
-              <span>Nous traitons votre réservation, vérifiez votre courrier électronique pour la confirmation du réservation
-                et attendez notre téléphone.
+              <span style={{ margin: 50, textAlign: 'center', alignItems: "center", justifyContent: 'center' }}>
+                <p style={{ textAlign: 'center', margin: 50 }}>
+                  Nous traitons votre réservation, vérifiez votre courrier électronique pour la confirmation du réservation.
+                </p>
               </span>
             </div>
             :
             <form onSubmit={handleSubmit(onSubmit)}>
               <div>
+                <p style={{
+                  fontFamily: 'Monoton',
+                  fontSize: 50,
+                  color: '#ff7f50'
+                }}>FALLING  LEAVES</p>
+
+              </div>
+              <div>
                 <input
-                  {...register("fullName", { required: 'Veuillez entrer votre Nom et Prénom.' })}
-                  placeholder='Nom et Prénom'
+                  {...register("fullName", { required: 'Please enter your full name.' })}
+                  placeholder='Full Name'
+                  className="formInput"
                 />
 
-                {errors.fullName && <span>{errors.fullName.message}</span>}
               </div>
+              {errors.fullName && <span style={{ fontSize: 15, color: '#e74c3c' }}>{errors.fullName.message}</span>}
 
               <div>
                 <input
                   {...register("email", {
-                    required: 'Veuillez entrer votre E-mail.',
+                    required: 'Please enter your email.',
                     pattern: {
                       value: /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/,
-                      message: 'Veuillez entrer un email valide.'
+                      message: 'Please enter a valid email.'
                     }
                   })}
                   placeholder='E-mail'
+                  className="formInput"
                 />
 
-                {errors.email && <span>{errors.email.message}</span>}
               </div>
+              {errors.email && <span style={{ fontSize: 15, color: '#e74c3c' }}>{errors.email.message}</span>}
 
               <div>
                 <input
                   {...register("phone", {
-                    required: 'Veuillez entrer votre numéro de téléphone.',
+                    required: 'Please enter your phone number.',
                     pattern: {
                       value: /(2|5|9|)\d{8}/,
-                      message: 'Veuillez entrer un numéro de téléphone valide.'
+                      message: 'Please enter a valid phone number.'
                     }
                   })}
-                  placeholder='Numéro de téléphone'
+                  placeholder='Phone Number'
+                  className="formInput"
                 />
 
-                {errors.phone && <span>{errors.phone.message}</span>}
               </div>
+              {errors.phone && <span style={{ fontSize: 15, color: '#e74c3c' }}>{errors.phone.message}</span>}
 
               <div>
-                <select {...register("broughtBy")}>
+                <select {...register("broughtBy")} className="select">
+                  <option value="" key="" style={{ color: "black" }}>How Did You Hear About Us?</option>
                   {persons.map(p => {
                     return (
-                      <option value={p.value} key={p.id}>{p.name}</option>
+                      <option value={p.value} key={p.id} style={{ color: "black" }}>{p.name}</option>
                     )
                   })}
                 </select>
               </div>
+
+              {filledSelect ? <span style={{ fontSize: 15, color: '#e74c3c' }}>Please, select how did you hear about us</span> : null}
+
               {
                 loading ?
                   <div style={{ marginTop: 25 }}>
@@ -157,7 +175,9 @@ function App() {
                     />
                   </div>
                   :
-                  <input type="submit" value="Envoyer" />
+                  <div>
+                    <input type="submit" value="BOOK NOW" className="buttonSubmit" />
+                  </div>
               }
             </form>
         }

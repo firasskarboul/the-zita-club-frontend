@@ -3,7 +3,12 @@
 }
 
 .App-header {
-  background-color: #282c34;
+  background-image: url("./assets/bg1.png");
+  background-position: center center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-color: #464646;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -11,6 +16,86 @@
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
+}
+
+::-webkit-input-placeholder {
+  /* Edge */
+  color: white;
+}
+
+:-ms-input-placeholder {
+  /* Internet Explorer 10-11 */
+  color: white;
+}
+
+::placeholder {
+  color: white;
+}
+
+.formInput {
+  background-color: transparent;
+  padding: 10px;
+  margin-top: 20px;
+  border: solid 3px #fff;
+  border-radius: 0px;
+  font-size: 20px;
+  font-family: "Inria Sans", sans-serif;
+  font-weight: normal;
+  color: #fff;
+  text-align: center;
+}
+
+.formInput:focus {
+  background-color: transparent;
+  padding: 10px;
+  margin-top: 20px;
+  border: solid 3px #fff;
+  border-radius: 0px;
+  font-size: 20px;
+  font-family: "Inria Sans", sans-serif;
+  font-weight: normal;
+  color: #fff;
+  text-align: center;
+}
+
+.select {
+  background-color: transparent;
+  padding: 10px;
+  margin-top: 20px;
+  border: solid 3px #fff;
+  border-radius: 0px;
+  font-size: 18px;
+  font-family: "Inria Sans", sans-serif;
+  font-weight: normal;
+  color: #fff;
+  text-align: center;
+  width: 290px;
+}
+
+.buttonSubmit {
+  border: solid 3px #fff;
+  background-color: transparent;
+  border-radius: 0px;
+  font-size: 20px;
+  font-family: 'Inria Sans', sans-serif;
+  font-weight: normal;
+  color: #fff;
+  text-align: center;
+  line-height: 31px;
+  margin-top: 20px;
+  margin-bottom: 40px;
+  padding: 10px;
+  height: auto;
+  width: 100%;
+  max-width: 175px;
+  font-weight: bold;
+}
+
+.buttonSubmit:hover {
+  background-color: white;
+  color: black;
+  font-weight: bold;
+  cursor: pointer;
 }
 
 .App-link {
