@@ -20,8 +20,8 @@ function App() {
     },
     {
       id: 3,
-      name: 'Sami Guesmi',
-      value: 'sami guesmi'
+      name: 'Sam Feeling',
+      value: 'sam feeling'
     },
 
     {
@@ -31,8 +31,8 @@ function App() {
     },
     {
       id: 5,
-      name: 'Majdi Manai',
-      value: 'majdi manai'
+      name: 'Majdi Mouelhi',
+      value: 'majdi Mouelhi'
     },
     {
       id: 6,
